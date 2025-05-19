@@ -24,6 +24,7 @@ jobs:
         with:
           root_file: |
             Signal-System-Notes.tex
+          latexmk_use_xelatex: true
           
       - name: Stash PDF
         id: stash-pdf
