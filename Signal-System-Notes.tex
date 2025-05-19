@@ -1,0 +1,77 @@
+\documentclass[device=normal, lang=cn]{elegantbook}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{extarrows}
+\usepackage{physics}
+\usepackage{mathtools}
+
+\input{math_cmds.tex}
+
+\definecolor{pgcolor}{RGB}{251, 250, 248}
+\pagecolor{pgcolor}
+\numberwithin{equation}{section}
+
+% \theoremstyle{definition} %
+% \newtheorem{property}{Property}[section] %
+
+\title{信号与系统笔记}
+\author{FHYQ-Dong}
+\date{\today}
+\version{1.0}
+\cover{images/Note-cover.jpg}
+\definecolor{customcoverlinecolor}{RGB}{185, 35, 161}
+\colorlet{coverlinecolor}{customcoverlinecolor}
+
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+\mainmatter
+
+
+\chapter{Z变换}
+
+\section{Z变换的性质}
+
+\subsection{时移性质}
+已知$\mathcal{Z}[x(n)] = X(z)$，收敛域$R_1 < \abs{z} < R_2$.
+\begin{itemize}
+    \item 双边z变换：
+    \begin{equation}
+        \mathcal{Z}[x(n-m)] = z^{-m}X(z), \quad R_1 < \abs{z} < R_2
+    \end{equation}
+    \begin{proof}
+        \begin{equation}
+        \begin{aligned}
+            \mathcal{Z}[x(n-m)] &= \sum_{n=-\infty}^{+\infty} x(n-m)z^{-n} = \sum_{k=-\infty}^{+\infty} x(k)z^{-(k+m)} \\
+            &= z^{-m}\sum_{k=-\infty}^{+\infty} x(k)z^{-k} = z^{-m}X(z)
+        \end{aligned}
+        \end{equation}
+    \end{proof}
+    \item 右边z变换，$m > 0$:
+    \begin{align}
+        \mathcal{Z}[x(n-m)] &= z^{-m}\qty(X(z) + \sum_{n=-m}^{-1} x(n)z^{-n}), \quad R_1 < \abs{z} < R_2 \\ 
+        \mathcal{Z}[x(n+m)] &= z^{m}\qty(X(z) - \sum_{n=1}^{m-1} x(n)z^{-n}), \quad R_1 < \abs{z} < R_2
+    \end{align}
+    \item 左边z变换，$m > 0$:
+    \begin{align}
+        \mathcal{Z}[x(n-m)] &= z^{-m}\qty(X(z) - \sum_{n=-m+1}^{0} x(n)z^{-n}), \quad R_1 < \abs{z} < R_2 \\ 
+        \mathcal{Z}[x(n+m)] &= z^{m}\qty(X(z) + \sum_{n=0}^{m} x(n)z^{-n}), \quad R_1 < \abs{z} < R_2
+    \end{align}
+    \begin{proof}
+        仅证明右边z变换且$m > 0$的情形，其余类似.
+        \begin{equation}
+        \begin{aligned}
+            \mathcal{Z}[x(n-m)] &= \sum_{n=0}^{+\infty} x(n-m)z^{-n} = \sum_{k=-m}^{+\infty} x(k)z^{-(k+m)} \\
+            &= z^{-m}\sum_{k=-m}^{+\infty} x(k)z^{-k} = z^{-m}\qty(X(z) + \sum_{n=-m}^{-1} x(n)z^{-n})
+        \end{aligned}
+        \end{equation}
+    \end{proof}
+\end{itemize}
+
+
+\end{document}
